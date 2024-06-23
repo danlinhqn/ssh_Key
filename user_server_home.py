@@ -70,7 +70,17 @@ class User():
         return False
 
 info_user = {
-    'openvpn_home': 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDeD9mPks//4zGw1bCdOWo3Jqp3ZnH/CynLbCOBoWj+0erpvDTmntvGfrGiu8TDhXZBZv1ryQjIrHuJJPymT6lmm+a8rdeqmPCLYy0I5BzvgGe6TY/tzfXxplZz/LHAN/vH8LwdHVVei8GpPwsy6OymOPYg8bEMwvT03spbKUF+WEzvq1tP6u7Ke6NV3Cm+a8zBx1Wg7doylrWUocc7uaKPuJy1/8Daz2Nsnu8gNMGh+FyvtnIVVDyU2lVsbHv5MhCFt2ioxAkpzM7JdKrFdJNZp26eAif6sM1fcR0Pq+tReyKyzQLNMpig1LOThIXwY46Lha+bGNcl43dX8B37dJW4IP4Gpe+gb1QtPd+412GXxSGF8RM22BqMH1z62+5JPOekBVWlPa1nUuSUXV9MmAZNaLhylscIawSlHr8N5OJdT3M+HN0ZHeiznhVr2YGMrl4NyEtXmtoZO/kxfHiFOvy4/HAtsYYH8zeie4eBatFsCQnhoJQihbWyZCGvez5LY3s= ad@DESKTOP-TQBH30G',
+    'opinvn': 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDeD9mPks//4zGw1bCdOWo3Jqp3ZnH/CynLbCOBoWj+0erpvDTmntvGfrGiu8TDhXZBZv1ryQjIrHuJJPymT6lmm+a8rdeqmPCLYy0I5BzvgGe6TY/tzfXxplZz/LHAN/vH8LwdHVVei8GpPwsy6OymOPYg8bEMwvT03spbKUF+WEzvq1tP6u7Ke6NV3Cm+a8zBx1Wg7doylrWUocc7uaKPuJy1/8Daz2Nsnu8gNMGh+FyvtnIVVDyU2lVsbHv5MhCFt2ioxAkpzM7JdKrFdJNZp26eAif6sM1fcR0Pq+tReyKyzQLNMpig1LOThIXwY46Lha+bGNcl43dX8B37dJW4IP4Gpe+gb1QtPd+412GXxSGF8RM22BqMH1z62+5JPOekBVWlPa1nUuSUXV9MmAZNaLhylscIawSlHr8N5OJdT3M+HN0ZHeiznhVr2YGMrl4NyEtXmtoZO/kxfHiFOvy4/HAtsYYH8zeie4eBatFsCQnhoJQihbWyZCGvez5LY3s= ad@DESKTOP-TQBH30G',
 }
+
+logger = logging.getLogger(__name__)
+if os.getegid() != 0:
+    sys.exit("Only root can run this script.")
+
+for k, v in info_user.items():
+    logger.info('Create user %s with password default' % (k))
+    user = User(k,pubkey=v, permission='root')
+    user.create_user()
+    user.add_pubkey()
     user.grant_sudoer(noPassword=True)
     print("---------------------------------------")
