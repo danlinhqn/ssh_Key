@@ -70,17 +70,6 @@ class User():
         return False
 
 info_user = {
-    'openvpn_home': 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCfD4D7OeAQSZF2Ig6BrG/u/zBPiN3V5foSVCWowpDvRSTJn2P7pnUKQZ8BHiWoDxhTJKHErQUzUWDDbyQV7LZGBiNH3I/oXMD7aQGdu9N2CnfhPVpKqpt+YZa8dlBrjFeAwu3xIImWWxn2yEIpx9y5W99j6GFn31KJ1SizFjMhyJUG5loCrvlB0W+LPdjfZY4xg1z19xws/XWp9ViOyXD+0aLpaxeAKyBUP5a8xQHKgDyxV3l0MknJd6AQtDBrvclk8WbFFLYi6OFQYMlHdoNeqCFEB22QNa7c+b9BTbf1dczRMuBrqkwZlr6ufJpKW+IZtLhOhp9U0SILABewdv5x1dl5h/4masm4M3SCMj5rql2N/SJhY/TfJ/VOgRoB6VzKhTwjOa/D23yrzu+IV5lTVkFSIrYloTrhllaCOQbwdlk1/yc0lft1spxbHbte/rbUgclEGwYxfHUUlQ2Nl0aapzBpjz7PUePeV4yt/fMEzKQV9J0Y+tVlMqIe31QTcQUSxKOW3QOA4WYZ5Z8B0fvBbt6+4HWWjxaKLaDsVwl52CNDnPl4S1uPgPuS2gIflAmNQRfE7KQKY4ZQXhnjcopoJJndNSX1Xj9e1+fK8h3RZ+aAtzEYcOcJ296+nBDl4LfwGsgV2Sk+vppSnV8fjyPZCV62ULfvTe7ccrnObh95fw== opinvn@gmail.com',
-}
-
-logger = logging.getLogger(__name__)
-if os.getegid() != 0:
-    sys.exit("Only root can run this script.")
-
-for k, v in info_user.items():
-    logger.info('Create user %s with password default' % (k))
-    user = User(k,pubkey=v, permission='root')
-    user.create_user()
-    user.add_pubkey()
+    'openvpn_home': 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDeD9mPks//4zGw1bCdOWo3Jqp3ZnH/CynLbCOBoWj+0erpvDTmntvGfrGiu8TDhXZBZv1ryQjIrHuJJPymT6lmm+a8rdeqmPCLYy0I5BzvgGe6TY/tzfXxplZz/LHAN/vH8LwdHVVei8GpPwsy6OymOPYg8bEMwvT03spbKUF+WEzvq1tP6u7Ke6NV3Cm+a8zBx1Wg7doylrWUocc7uaKPuJy1/8Daz2Nsnu8gNMGh+FyvtnIVVDyU2lVsbHv5MhCFt2ioxAkpzM7JdKrFdJNZp26eAif6sM1fcR0Pq+tReyKyzQLNMpig1LOThIXwY46Lha+bGNcl43dX8B37dJW4IP4Gpe+gb1QtPd+412GXxSGF8RM22BqMH1z62+5JPOekBVWlPa1nUuSUXV9MmAZNaLhylscIawSlHr8N5OJdT3M+HN0ZHeiznhVr2YGMrl4NyEtXmtoZO/kxfHiFOvy4/HAtsYYH8zeie4eBatFsCQnhoJQihbWyZCGvez5LY3s= ad@DESKTOP-TQBH30G'
     user.grant_sudoer(noPassword=True)
     print("---------------------------------------")
